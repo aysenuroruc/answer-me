@@ -7,6 +7,11 @@ spring:
       host: 10.254.147.180
       port: 32197
       database: aoquestions
+  rabbitmq:
+    host: 192.168.33.19
+    port: 5672
+    username: guest
+    password: guest
       
 security:
   oauth2:

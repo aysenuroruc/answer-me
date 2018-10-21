@@ -3,6 +3,8 @@ package com.qa.main.controller;
 import java.security.Principal;
 import java.util.Map;
 
+import org.springframework.amqp.rabbit.core.RabbitMessagingTemplate;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,6 +21,9 @@ import com.qa.main.repo.AnswerActionRepository;
 @RestController
 @RequestMapping("/answeractions")
 public class AnswerActionController {
+	
+	@Autowired
+	RabbitTemplate rabbitTemplate;
 
 	@Autowired
 	AnswerActionRepository actionRepo;
@@ -39,6 +44,7 @@ public class AnswerActionController {
 		action.setUsername("sezer");
 		actionRepo.save(action);
 		producer.sendToKafka(action);
+	    rabbitTemplate.convertAndSend(action);	
 		return true;
 	}
 	
