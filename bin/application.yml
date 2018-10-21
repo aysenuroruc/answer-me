@@ -1,0 +1,15 @@
+server:
+  port: 8091
+  
+spring:
+  data:
+    mongodb:
+      host: 10.254.147.180
+      port: 32197
+      database: aoquestions
+      
+security:
+  oauth2:
+    resource:
+      userInfoUri: http://10.254.147.180:31083/api/1.0/auth/user
+      
